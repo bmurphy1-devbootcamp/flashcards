@@ -1,40 +1,46 @@
 class Deck
-  attr_reader :deck, :file
-	def initialize(file='flashcard_samples.txt',name="new deck")
-		@name = name
-    @file = file
-		@deck = []
-    populate_deck
+  attr_reader :deck
+	def initialize(cards)
+		@deck = cards
 	end
 
-  def populate_deck
-    load_deck(file).each_slice(2){ |slice| @deck << Card.new(slice[0], slice[1]) }
-  end
-
   def shuffle
-    @deck.shuffle!
+    deck.shuffle!
   end
 
   def remove(card)
-    @deck.delete(card)
+    deck.delete(card)
+  end
+
+  def each_card(&block)
+    deck.each(&block)
+  end
+
+  def self.from_file(file)
+    self.new(populate_deck(file))
+  end
+
+  def self.populate_deck(file)
+    deck = []
+    load_deck(file).each_slice(2){ |definition, answer| deck << Card.new(definition, answer) }
+    deck
   end
 
   private
 
-  def load_deck(file)
+  def self.load_deck(file)
     File.readlines(file).delete_if{ |a| a == "\n" }
   end
 end
 
 
 class Card
-  attr_reader :question, :answer
   def initialize(q, a)
     @question = q
     @answer = a
   end
 
-  def stringitize
+  def to_s
     @question
   end
 

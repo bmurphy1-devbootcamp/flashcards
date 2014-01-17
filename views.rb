@@ -8,7 +8,7 @@ class View
 
   def self.show_card(current_card)
   	puts "Definition"
-    puts current_card.stringitize
+    puts current_card
   end
 
   def self.input
@@ -16,11 +16,11 @@ class View
   end
 
   def self.try_again
-  	puts "Incorrect! Try again."
+  	puts "Incorrect! Try again.\n\n"
   end
 
   def self.correct
-  	puts "Correct!"
+  	puts "Correct!\n\n"
   end
 
   def self.finished
@@ -30,7 +30,6 @@ class View
   def self.prompt
   	print "Guess: "
   end
-
 end
 
 
