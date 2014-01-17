@@ -1,4 +1,4 @@
-# Main file for 
+# Main file for
 
 require_relative 'models'
 require_relative 'views'
@@ -8,12 +8,12 @@ class Controller
   def run
     View.welcome
     deck.shuffle
-    deck.each_card do |card|
-      current_card = deck.next_card
-      View.show_card(current_card)
+    deck.each do |card|
+      View.show_card(card)
       until current_card.correct?(View.input)
         View.try_again
       end
+      deck.remove(card)
       View.correct
     end
     View.finished
