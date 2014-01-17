@@ -1,19 +1,25 @@
 # Main file for
 
-require_relative 'models'
-require_relative 'views'
+require './models'
+require './views'
+
+
 
 class Controller
 
+  def initialize
+    @deck = Deck.new('flashcard_samples.txt',"new deck")
+  end
+
   def run
     View.welcome
-    deck.shuffle
-    deck.each do |card|
+    @deck.shuffle
+    @deck.deck.each do |card|
       View.show_card(card)
-      until current_card.correct?(View.input)
+      until card.correct?(View.input)
         View.try_again
       end
-      deck.remove(card)
+      @deck.remove(card)
       View.correct
     end
     View.finished
@@ -21,3 +27,6 @@ class Controller
 
 end
 
+play = Controller.new
+# model = Deck.new
+play.run

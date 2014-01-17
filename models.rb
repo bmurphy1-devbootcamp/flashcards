@@ -1,11 +1,10 @@
-
 class Deck
-  include Enumerable
   attr_reader :deck, :file
-	def initialize(name="new deck", file)
+	def initialize(file='flashcard_samples.txt',name="new deck")
 		@name = name
     @file = file
 		@deck = []
+    populate_deck
 	end
 
   def populate_deck
@@ -20,10 +19,6 @@ class Deck
     @deck.delete(card)
   end
 
-  def each(&block)
-    @deck.each(&block)
-  end
-
   private
 
   def load_deck(file)
@@ -34,26 +29,17 @@ end
 
 class Card
   attr_reader :question, :answer
-	def initialize(q, a)
-		@question = q
-		@answer = a
-	end
+  def initialize(q, a)
+    @question = q
+    @answer = a
+  end
+
+  def stringitize
+    @question
+  end
 
   def correct?(input)
-    input == @answer ? true : false
+    input.downcase.strip == @answer.downcase.strip
   end
 
 end
-
-
-this_deck = Deck.new("flashcard_samples.txt")
-this_deck.populate_deck
-p this_deck.deck
-p this_deck.shuffle
-
-p this_deck.next_card
-p this_deck.deck
-
-# deck
-# .each_card
-
