@@ -3,8 +3,8 @@ require_relative 'views'
 
 class Controller
 
-  def initialize
-    @deck = Deck.from_file('flashcard_samples.txt')
+  def initialize(file_name)
+    @deck = Deck.from_file(file_name)
   end
 
   def run
@@ -29,5 +29,5 @@ class Controller
 
 end
 
-play = Controller.new()
+play = Controller.new(ARGV[0])
 play.run

@@ -12,7 +12,7 @@ class View
   end
 
   def self.input
-  	gets.chomp!
+  	STDIN.gets.chomp!
   end
 
   def self.try_again
