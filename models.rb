@@ -12,8 +12,21 @@ class Deck
     deck.delete(card)
   end
 
+  def add_card(card)
+    @deck << card
+  end
+
   def each_card(&block)
     deck.each(&block)
+  end
+
+  def pull_random_card
+    @deck.shuffle!
+    @deck.pop
+  end
+
+  def empty?
+    @deck.empty?
   end
 
   def self.from_file(file)
@@ -38,6 +51,7 @@ class Card
   def initialize(q, a)
     @question = q
     @answer = a
+    @guesses = 0
   end
 
   def to_s
@@ -46,6 +60,10 @@ class Card
 
   def correct?(input)
     input.downcase.strip == @answer.downcase.strip
+  end
+
+  def increase_guesses
+    @guesses += 1
   end
 
 end

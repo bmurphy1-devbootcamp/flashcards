@@ -3,7 +3,8 @@ class View
   end
 
   def self.welcome
-  	puts "Welcome to Ruby Flash Cards. To play, just enter the correct term for each definition.  Ready?  Go!\n\n"
+  	puts "Welcome to Ruby Flash Cards. You're using deck #{ARGV[0].sub(/\.txt/, "")}"
+    puts "To play, just enter the correct term for each definition.  Ready?  Go!\n\n"
   end
 
   def self.show_card(current_card)

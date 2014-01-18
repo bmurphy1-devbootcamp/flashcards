@@ -11,29 +11,23 @@ class Controller
     View.welcome
     @deck.shuffle
     until @deck.empty?
-      View.show_card(@deck.random_card)
-      View.prompt
-      
-
-
-
-    @deck.each_card do |card|
-      guess_and_check(card)
+      show_and_check_cards
     end
     View.finished
   end
 
-  def guess_and_check(card)
-    View.show_card(card)
+  def show_and_check_cards
+    current_card = @deck.pull_random_card
+    View.show_card(current_card)
     View.prompt
-    until card.correct?(View.input)
+    if current_card.correct?(View.input)
+      View.correct
+    else
       View.try_again
-      View.prompt
+      current_card.increase_guesses
+      @deck.add_card(current_card)
     end
-    @deck.remove(card)
-    View.correct
   end
-
 end
 
 play = Controller.new(ARGV[0])
