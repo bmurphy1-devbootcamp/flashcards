@@ -10,6 +10,13 @@ class Controller
   def run
     View.welcome
     @deck.shuffle
+    until @deck.empty?
+      View.show_card(@deck.random_card)
+      View.prompt
+      
+
+
+
     @deck.each_card do |card|
       guess_and_check(card)
     end
